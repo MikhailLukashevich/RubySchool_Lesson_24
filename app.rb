@@ -18,13 +18,26 @@ end
 
 post '/enrol' do
 	@user_name = params[:user_name]
-		if @user_name = ''
-			@error = 'Enter name'
-			return erb :enrol
-		end
 	@phone = params[:phone]
 	@data_time = params[:data_time]
 	@barber = params[:barber]
 	@color = params[:color]
+
+	if @user_name == ''
+		@error = 'Enter name'
+	end
+
+	if @phone == ''
+		@error = 'Enter phone'
+	end
+
+	if @data_time == ''
+		@error = 'Enter data end time'
+	end
+
+	if @error != ''
+		return erb :enrol
+	end
+
 	erb "OK!, #{@user_name}, #{@phone}, #{@data_time}, #{@barber}, #{@color}"
 end
