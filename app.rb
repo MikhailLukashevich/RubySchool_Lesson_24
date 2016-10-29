@@ -8,6 +8,7 @@ get '/' do
 end
 
 get '/about' do
+	@error = 'something wrong'
   erb :about
 end
 
@@ -17,6 +18,10 @@ end
 
 post '/enrol' do
 	@user_name = params[:user_name]
+		if @user_name = ''
+			@error = 'Enter name'
+			return erb :enrol
+		end
 	@phone = params[:phone]
 	@data_time = params[:data_time]
 	@barber = params[:barber]
