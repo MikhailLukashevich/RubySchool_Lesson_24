@@ -1,4 +1,4 @@
-#encoding: utf-8
+ #encoding: utf-8
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/reloader'
@@ -23,20 +23,15 @@ post '/enrol' do
 	@barber = params[:barber]
 	@color = params[:color]
 
-	if @user_name == ''
-		@error = 'Enter name'
-	end
+	hh = {:user_name => "Enter name",
+				:phone => "Enter phone",
+				:data_time => "Enter data and time"}
 
-	if @phone == ''
-		@error = 'Enter phone'
-	end
-
-	if @data_time == ''
-		@error = 'Enter data end time'
-	end
-
-	if @error != ''
-		return erb :enrol
+	hh.each do |key, value|
+		if params[key] == ""
+			@error = hh[key]
+			return erb :enrol
+		end
 	end
 
 	erb "OK!, #{@user_name}, #{@phone}, #{@data_time}, #{@barber}, #{@color}"
